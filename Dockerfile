@@ -68,7 +68,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 421C365BD9
 RUN echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list
 
 # install bootstrap tools
-RUN apt-get update && apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install --no-install-recommends -y --allow-unauthenticated\
     python-rosdep \
     python-rosinstall \
     python-vcstools \
@@ -84,14 +84,14 @@ RUN rosdep init \
 
 # install ros packages
 ENV ROS_DISTRO kinetic
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --allow-unauthenticated\
     ros-kinetic-ros-core=1.3.2-0* \
     && rm -rf /var/lib/apt/lists/*
 
 # ===== ros-base desktop percept robot and desktop full install
 
 # install ros packages
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --allow-unauthenticated\
     ros-kinetic-ros-base=1.3.2-0* \
     ros-kinetic-robot=1.3.2-0* \
     ros-kinetic-desktop=1.3.2-0* \
@@ -102,7 +102,7 @@ RUN apt-get update && apt-get install -y \
 RUN rosdep update
 
 # Install dependencies for the F1/10 Tutorials
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --allow-unauthenticated\
     python-rosinstall-generator \
     ros-kinetic-ros-control \
     # ros-kinetic-gazebo-ros-control \
