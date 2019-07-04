@@ -3,7 +3,7 @@ Based on:  <https://hub.docker.com/r/dorowu/ubuntu-desktop-lxde-vnc/> and <https
 
 ## Quick start
 ```
-docker run -it --rm -p 6080:80 madhurbehl/f1tenth
+docker run -it --rm -p 6080:80 billyz/f110
 ```
 Then open your browser and go to http://127.0.0.1:6080/.
 After you've connected to the Ubuntu in Docker, click the button at the bottom left of the screen, go to System Tools --> LXTerminal.
