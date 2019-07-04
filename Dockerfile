@@ -131,7 +131,7 @@ RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; catkin_make
 # Clone and build the Racecar simulator
 RUN mkdir -p /home/catkin_ws/src/racecar_simulator
 RUN git clone https://github.com/mlab-upenn/racecar_simulator /home/catkin_ws/src/racecar_simulator
-RUN /bin/bash -c 'cd /home/catkin_ws; catkin_make; source devel/setup.bash'
+RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; catkin_make'
 
 EXPOSE 80
 WORKDIR /home/
