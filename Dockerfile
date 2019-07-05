@@ -110,7 +110,7 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated\
     ros-kinetic-navigation qt4-default \
     ros-kinetic-ackermann-msgs \
     ros-kinetic-serial \
-    ros-kinetic-teb-local-planner*
+    ros-kinetic-joy
 
 # Update Gazebo 7
 # RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
