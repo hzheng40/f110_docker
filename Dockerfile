@@ -110,12 +110,16 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated\
     ros-kinetic-navigation qt4-default \
     ros-kinetic-ackermann-msgs \
     ros-kinetic-serial \
-    ros-kinetic-joy
+    ros-kinetic-joy \
+    libeigen3-dev
 
 # Update Gazebo 7
 # RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
 # RUN wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
 # RUN apt-get update && apt-get --yes install -y gazebo7 libignition-math2-dev
+
+# symbolic link for Eigen
+RUN /bin/bash -c 'cp -r /usr/include/eigen3/Eigen /usr/include'
 
 # setup ROS workspace
 RUN mkdir -p /home/catkin_ws/src
@@ -131,8 +135,12 @@ RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; catkin_make
 # Clone and build the Racecar simulator
 RUN mkdir -p /home/catkin_ws/src/racecar_simulator
 RUN git clone https://github.com/mlab-upenn/racecar_simulator /home/catkin_ws/src/racecar_simulator
-RUN /bin/bash -c 'cd /home/catkin_ws/src/racecar_simulator'
-RUN git checkout joe-dev
+RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws/src/racecar_simulator; git checkout joe-dev'
+# Clone and build the pure pursuit package
+RUN mkdir -p /home/catkin_ws/src/pure_pursuit
+RUN git clone https://github.com/mlab-upenn/f110_pure_pursuit /home/catkin_ws/src/pure_pursuit
+RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws/src/pure_pursuit; git checkout docker'
+
 RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; catkin_make'
 
 EXPOSE 80
