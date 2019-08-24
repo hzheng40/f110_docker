@@ -28,7 +28,7 @@ RUN apt-get update \
         mesa-utils libgl1-mesa-dri \
         gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine pinta arc-theme \
         dbus-x11 x11-utils \
-        vlc flvstreamer ffmpeg \
+        vlc flvstreamer ffmpeg gedit\
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
@@ -135,11 +135,7 @@ RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; catkin_make
 # Clone and build the Racecar simulator
 RUN mkdir -p /home/catkin_ws/src/racecar_simulator
 RUN git clone https://github.com/mlab-upenn/racecar_simulator /home/catkin_ws/src/racecar_simulator
-RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws/src/racecar_simulator; git checkout joe-dev'
-# Clone and build the pure pursuit package
-RUN mkdir -p /home/catkin_ws/src/pure_pursuit
-RUN git clone https://github.com/mlab-upenn/f110_pure_pursuit /home/catkin_ws/src/pure_pursuit
-RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws/src/pure_pursuit; git checkout docker'
+RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws/src/racecar_simulator'
 
 RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; catkin_make'
 
